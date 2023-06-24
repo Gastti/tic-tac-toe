@@ -1,7 +1,8 @@
 .container {
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 0 auto;
+  background-color: transparent;
+  padding: 0px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 1;
 }

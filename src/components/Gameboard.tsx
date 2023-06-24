@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Gameboard.css";
-import { Marker } from "../App";
+import { Marker, IPlayer } from "../App";
+import PlayerCard from "./PlayerCard";
 
 interface GameboardProps {
   gameboard: Marker[];
   setGameboard: React.Dispatch<React.SetStateAction<Marker[]>>;
+  players: Array<IPlayer>;
+  setPlayers: React.Dispatch<React.SetStateAction<Array<IPlayer>>>;
   currentMarker: Marker;
   setCurrentMarker: React.Dispatch<React.SetStateAction<Marker>>;
+  finished: boolean;
   setFinished: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Gameboard({
   gameboard,
   setGameboard,
+  players,
+  setPlayers,
   currentMarker,
   setCurrentMarker,
+  finished,
   setFinished,
 }: GameboardProps): React.ReactElement {
+  const [winner, setWinner] = useState<string>("");
   const renderCell = (cell: string, index: number) => {
     return (
       <div
         key={index}
         onClick={() => handleCellClick(index)}
-        className={cell === "" ? "empty" : cell}
+        className={`cell ${cell === "" ? "empty" : cell}`}
       >
         <span>{gameboard[index]}</span>
       </div>
@@ -37,6 +45,21 @@ export default function Gameboard({
       setCurrentMarker(currentMarker === "X" ? "O" : "X");
       checkWinner(newGameboard);
     }
+  };
+
+  const updateScores = (winner: string) => {
+    const newPlayers: Array<IPlayer> = [...players];
+    const findWinner = newPlayers.find((x) => x.marker === winner);
+
+    if (findWinner) {
+      findWinner.score++;
+      const updatedPlayers: Array<IPlayer> = newPlayers.map((player) =>
+        player.marker === winner ? findWinner : player
+      );
+      setPlayers(updatedPlayers);
+    }
+
+    console.log(findWinner);
   };
 
   function checkWinner(gameboard: Marker[]): Marker | null {
@@ -58,6 +81,9 @@ export default function Gameboard({
         gameboard[a] === gameboard[b] &&
         gameboard[a] === gameboard[c]
       ) {
+        console.log(typeof gameboard[a]);
+        updateScores(gameboard[a]);
+        setWinner(gameboard[a]);
         setFinished(true);
       }
     }
@@ -66,8 +92,25 @@ export default function Gameboard({
   }
 
   return (
-    <div className="gameboard">
-      {gameboard.map((cell, index) => renderCell(cell, index))}
-    </div>
+    <>
+      <div className="players-box">
+        {players.map((player) => (
+          <PlayerCard
+            key={player.name}
+            player={player}
+            currentMarker={currentMarker}
+            finished={finished}
+          />
+        ))}
+      </div>
+      <div className="gameboard">
+        {gameboard.map((cell, index) => renderCell(cell, index))}
+        {finished && (
+          <div className="finished">
+            <h1>Juego Terminado</h1>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
