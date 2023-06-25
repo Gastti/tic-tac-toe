@@ -1,6 +1,8 @@
 .markerselect {
   margin: 0 auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .markerselect-options {
@@ -9,29 +11,19 @@
   justify-content: center;
 }
 
-.markerselect-title {
-  font-size: 2rem;
-  font-weight: 500;
-  color: #b721ff;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .markerselect-option {
   font-size: 6rem;
   font-family: "Lato", sans-serif;
   font-weight: 900;
   aspect-ratio: 1/1;
   width: 120px;
-  background: #c8c8c8;
-  background: linear-gradient(19deg, #dddddd 0%, #ebebeb 100%);
-  border: none;
-  border-radius: 6px;
+  background: #1e104c;
+  border: 2px solid #6548c674;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all .3s;
 }
 
 .markerselect-option:hover {
-  background: #21d4fd;
-  background: linear-gradient(19deg, #21d5fdb9 0%, #b921ffc7 100%);
-  color: #fff;
+  transform: scale(1.1);
 }

@@ -16,17 +16,12 @@
 }
 
 .menu-option {
-  font-size: 1.5rem;
+  font-size: 2rem;
   padding: 15px 0px;
-  background: #c8c8c8;
-  background: linear-gradient(19deg, #c8c8c8 0%, #c8c8c8 100%);
-  border-radius: 6px;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
-}
-
-.menu-option:hover {
-  background: #21d4fd;
-  background: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+  font-family: var(--f-special);
+  font-weight: 400;
 }

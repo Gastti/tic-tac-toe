@@ -1,0 +1,18 @@
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+    content: "";
+    width: 50%;
+    height: 4px;
+    background-color: #ffcf32;
+    border-radius: 4px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}

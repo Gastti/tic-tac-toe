@@ -1,0 +1,44 @@
+.player-card-container {
+  text-align: center;
+  font-weight: 600;
+  flex-grow: 1;
+  max-width: 180px;
+}
+
+.player-card {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e104c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #6548c674;
+  border-radius: 10px;
+}
+
+.player-card.active {
+  border: 2px solid #f6f6f6;
+}
+
+.player-card-avatar {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  border: 2px solid #6548c674;
+  overflow: hidden;
+}
+
+.player-card-avatar > img {
+  width: 100%;
+}
+
+.player-card-marker {
+  font-size: 2rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+}
+
+.player-card-score > b {
+  color: #ffcf32;
+}
