@@ -24,7 +24,7 @@ export default function Gameboard({
   finished,
   setFinished,
 }: GameboardProps): React.ReactElement {
-  const [winner, setWinner] = useState<string>("");
+  const [winner, setWinner] = useState<IPlayer>();
   const renderCell = (cell: string, index: number) => {
     return (
       <div
@@ -56,6 +56,7 @@ export default function Gameboard({
       const updatedPlayers: Array<IPlayer> = newPlayers.map((player) =>
         player.marker === winner ? findWinner : player
       );
+      setWinner(findWinner);
       setPlayers(updatedPlayers);
     }
 
@@ -83,7 +84,6 @@ export default function Gameboard({
       ) {
         console.log(typeof gameboard[a]);
         updateScores(gameboard[a]);
-        setWinner(gameboard[a]);
         setFinished(true);
       }
     }
@@ -91,8 +91,17 @@ export default function Gameboard({
     return null;
   }
 
+  const restartGame = () => {
+    setFinished(false);
+    const newGameboard = Array(9).fill("");
+    setGameboard(newGameboard);
+  };
+
   return (
     <>
+    <button onClick={() => {
+      setCurrentMarker("");
+    }}>Volver</button>
       <div className="players-box">
         {players.map((player) => (
           <PlayerCard
@@ -107,7 +116,17 @@ export default function Gameboard({
         {gameboard.map((cell, index) => renderCell(cell, index))}
         {finished && (
           <div className="finished">
-            <h1>Juego Terminado</h1>
+            {winner && (
+              <div>
+                <div className="winner-image">
+                  <img src={winner.avatar} />
+                </div>
+                <h2>
+                  ¡<span className="winner-name">{winner.name}</span> ha ganado!
+                </h2>
+                <button onClick={restartGame} className="botondenaza gradient-green">Jugar otra vez</button>
+              </div>
+            )}
           </div>
         )}
       </div>
