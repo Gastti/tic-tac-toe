@@ -77,7 +77,7 @@ export default function Game(): React.ReactElement {
       ) {
         console.log(typeof gameboard[a]);
         updateScores(gameboard[a]);
-        game.setFinished(true);
+        game.setIsFinished(true);
       }
     }
 
@@ -85,7 +85,7 @@ export default function Game(): React.ReactElement {
   }
 
   const restartGame = () => {
-    game.setFinished(false);
+    game.setIsFinished(false);
     const newGameboard = Array(9).fill("");
     game.setGameboard(newGameboard);
   };
@@ -95,7 +95,7 @@ export default function Game(): React.ReactElement {
       players={game.players}
       gameboard={game.gameboard}
       currentMarker={game.currentMarker}
-      finished={game.finished}
+      finished={game.isFinished}
       winner={winner}
       renderCell={renderCell}
       restartGame={restartGame}

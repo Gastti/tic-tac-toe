@@ -1,0 +1,25 @@
+.logo {
+  margin: 10px auto;
+  max-width: 204px;
+  z-index: 0;
+  position: relative;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.logo > img {
+  width: 100%;
+  z-index: 0;
+}
+
+.logosmall {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.logosmall > img {
+  width: 100%;
+}

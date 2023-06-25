@@ -7,30 +7,6 @@
   background-image: url("./assets/images/bg.png");
 }
 
-.logo {
-  margin: 10px auto;
-  max-width: 204px;
-  z-index: 0;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.logo > img {
-  width: 100%;
-  z-index: 0;
-}
-
-.logosmall {
-  width: 200px;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.logosmall > img {
-  width: 100%;
-}
-
 .title {
   text-align: center;
   font-size: 4rem;
