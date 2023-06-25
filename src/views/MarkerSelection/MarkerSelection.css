@@ -1,0 +1,30 @@
+.markerselect {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .markerselect-options {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .markerselect-option {
+    font-size: 6rem;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    aspect-ratio: 1/1;
+    width: 120px;
+    background: #1e104c;
+    border: 2px solid #6548c674;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  
+  .markerselect-option:hover {
+    transform: scale(1.1);
+  }
+  
