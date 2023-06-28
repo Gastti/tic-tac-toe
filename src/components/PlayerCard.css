@@ -2,18 +2,16 @@
   text-align: center;
   font-weight: 600;
   flex-grow: 1;
-  max-width: 180px;
 }
 
 .player-card {
-  width: 100%;
   padding: 10px;
   background-color: #1e104c;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #6548c674;
+  border: 5px solid #6548c674;
   border-radius: 10px;
 }
 

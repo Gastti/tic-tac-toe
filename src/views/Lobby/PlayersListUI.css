@@ -1,0 +1,9 @@
+.playerlist {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px;
+    max-height: 400px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}

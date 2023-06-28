@@ -1,24 +1,18 @@
 import React from "react";
 import "./PlayerCard.css";
-import { IPlayer, Marker } from "../App";
+import { IPlayer } from "../App";
 
 interface PlayerCardProps {
   player: IPlayer;
-  currentMarker: Marker;
-  finished: boolean;
 }
 
 export default function PlayerCard({
-  player,
-  currentMarker,
-  finished
+  player
 }: PlayerCardProps): React.ReactElement {
   return (
     <div className="player-card-container">
       <div
-        className={`player-card ${
-          (currentMarker === player.marker && !finished) ? "active" : ""
-        }`}
+        className={`player-card`}
       >
         <div className="player-card-avatar">
           <img src={player.avatar} />
@@ -31,7 +25,6 @@ export default function PlayerCard({
           {player.marker}
         </span>
       </div>
-      {currentMarker === player.marker && <span style={{opacity: `${finished ? "0" : "1"}`}}>¡Tu Turno!</span>}
     </div>
   );
 }

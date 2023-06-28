@@ -32,3 +32,25 @@
 .gradient-green:hover {
   transform: scale(1.1);
 }
+
+.button {
+  font-size: 2rem;
+  padding: 15px 40px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--f-special);
+  font-weight: 400;
+  margin: 20px auto;
+  display: block;
+}
+
+.button.disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.button.disabled:hover {
+  transform: scale(1);
+}

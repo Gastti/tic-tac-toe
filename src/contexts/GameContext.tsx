@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Marker, IPlayer } from "../App";
-import avatar1 from "../assets/images/avatars/avatar-1.png";
-import avatar2 from "../assets/images/avatars/avatar-2.png";
 import { useNavigate } from "react-router-dom";
 
 interface GameProviderProps {
@@ -9,12 +7,15 @@ interface GameProviderProps {
 }
 
 interface GameState {
+  user: IPlayer;
+  marker: Marker;
   gameboard: Marker[];
   currentMarker: Marker;
   isStarted: boolean;
   isFinished: boolean;
   gamemode: string;
   players: IPlayer[];
+  setMarker: React.Dispatch<React.SetStateAction<Marker>>;
   setGameboard: React.Dispatch<React.SetStateAction<Marker[]>>;
   setCurrentMarker: React.Dispatch<React.SetStateAction<Marker>>;
   setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,18 +31,42 @@ const GameContext = React.createContext<GameState>({} as GameState);
 
 function GameProvider({ children }: GameProviderProps) {
   const navigate = useNavigate();
-  const [gameboard, setGameboard] = useState<Marker[]>(initialGameboard);
+  const [user, setUser] = useState<IPlayer>({} as IPlayer);
+  const [marker, setMarker] = useState<Marker>("" as Marker);
+  const [gameboard, setGameboard] = useState<Marker[]>([]);
   const [currentMarker, setCurrentMarker] = useState<Marker>("");
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [gamemode, setGamemode] = useState<string>("");
-  const [players, setPlayers] = useState<Array<IPlayer>>([
-    { id: 1, marker: "", name: "Jugador 1", avatar: avatar1, score: 0 },
-    { id: 2, marker: "", name: "Jugador 2", avatar: avatar2, score: 0 },
-  ]);
+  const [players, setPlayers] = useState<Array<IPlayer>>([]);
+
+  useEffect(() => {
+    const findUser = localStorage.getItem("user");
+
+    if (!findUser) {
+      const randomNumber = Math.floor(Math.random() * 4) + 1;
+      const id = crypto.randomUUID();
+      const newUser = {
+        id: id,
+        name: "Invitado",
+        avatar: `/src/assets/images/avatars/avatar-${randomNumber}.png`,
+      };
+
+      setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
+    }
+
+    const parsedUser = findUser ? JSON.parse(findUser) : null;
+    if (parsedUser) {
+      setUser(parsedUser);
+    }
+  }, []);
 
   const value = React.useMemo(
     () => ({
+      user,
+      marker,
+      setMarker,
       gameboard,
       setGameboard,
       currentMarker,
@@ -61,16 +86,13 @@ function GameProvider({ children }: GameProviderProps) {
         setGameboard(initialGameboard);
         setIsStarted(false);
         setIsFinished(false);
-        const updatedPlayers = [...players];
-        updatedPlayers[0].marker = "";
-        updatedPlayers[1].marker = "";
-        updatedPlayers[0].score = 0;
-        updatedPlayers[1].score = 0;
-        setPlayers(updatedPlayers);
         navigate("/");
       },
     }),
     [
+      user,
+      marker,
+      setMarker,
       gameboard,
       setGameboard,
       currentMarker,

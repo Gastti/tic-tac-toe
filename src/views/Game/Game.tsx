@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./Game.css";
-import { Marker, IPlayer } from "../../App";
+import { Marker } from "../../App";
 import { useGame } from "../../contexts/GameContext";
 import { Navigate } from "react-router-dom";
 import GameUI from "./GameUI";
-import avatar1 from "../../assets/images/avatars/avatar-1.png";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:4000");
 
 export default function Game(): React.ReactElement {
   const game = useGame();
-  const [winner, setWinner] = useState<IPlayer>({
-    id: 1,
-    marker: "",
-    name: "Jugador 1",
-    avatar: avatar1,
-    score: 0,
-  });
+
+  useEffect(() => {
+
+    if (game.gamemode === "online-player-vs-player") {
+      console.log("Online Mode");
+    }
+
+    return () => {
+      socket.off();
+    };
+  }, []);
 
   if (game.currentMarker === "") return <Navigate to="/markerselection" />;
 
@@ -40,22 +46,6 @@ export default function Game(): React.ReactElement {
     }
   };
 
-  const updateScores = (winner: string) => {
-    const newPlayers: Array<IPlayer> = [...game.players];
-    const findWinner = newPlayers.find((x) => x.marker === winner);
-
-    if (findWinner) {
-      findWinner.score++;
-      const updatedPlayers: Array<IPlayer> = newPlayers.map((player) =>
-        player.marker === winner ? findWinner : player
-      );
-      setWinner(findWinner);
-      game.setPlayers(updatedPlayers);
-    }
-
-    console.log(findWinner);
-  };
-
   function checkWinner(gameboard: Marker[]): Marker | null {
     const winningCombinations: number[][] = [
       [0, 1, 2], // Fila superior
@@ -76,7 +66,6 @@ export default function Game(): React.ReactElement {
         gameboard[a] === gameboard[c]
       ) {
         console.log(typeof gameboard[a]);
-        updateScores(gameboard[a]);
         game.setIsFinished(true);
       }
     }
@@ -84,21 +73,14 @@ export default function Game(): React.ReactElement {
     return null;
   }
 
-  const restartGame = () => {
-    game.setIsFinished(false);
-    const newGameboard = Array(9).fill("");
-    game.setGameboard(newGameboard);
-  };
-
   return (
-    <GameUI
-      players={game.players}
-      gameboard={game.gameboard}
-      currentMarker={game.currentMarker}
-      finished={game.isFinished}
-      winner={winner}
-      renderCell={renderCell}
-      restartGame={restartGame}
-    />
+    // <GameUI
+    //   players={game.players}
+    //   gameboard={game.gameboard}
+    //   currentMarker={game.currentMarker}
+    //   finished={game.isFinished}
+    //   renderCell={renderCell}
+    // />
+    <div>SALA DE PARTIDA</div>
   );
 }

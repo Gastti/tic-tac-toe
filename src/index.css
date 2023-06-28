@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 :root {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -15,16 +15,19 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --f-main: 'Quicksand', sans-serif;
-  --f-special: 'Passion One', cursive;
+  --f-main: "Quicksand", sans-serif;
+  --f-special: "Passion One", cursive;
 }
-
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100%;
   background: #21d4fd;
   background: linear-gradient(180deg, #291c75 0%, #110f26 100%);
+}
+
+#root {
+  height: 100%;
 }
 
 * {

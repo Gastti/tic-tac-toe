@@ -5,7 +5,7 @@ import { Modes } from "./Menu";
 
 interface MenuUIProps {
   modes: Array<Modes>;
-  handleMode: (value: string) => void;
+  handleMode: (key: string, path: string) => void;
 }
 
 export default function MenuUI({
@@ -20,7 +20,7 @@ export default function MenuUI({
             <button
               className={`menu-option ${mode.color}`}
               key={mode.key}
-              onClick={() => handleMode(mode.key)}
+              onClick={() => handleMode(mode.key, mode.path)}
             >
               {mode.name}
             </button>
