@@ -1,7 +1,6 @@
 import "./PlayersListUI.css";
-import { IPlayer, Marker } from "../../App";
+import { IPlayer } from "../../App";
 import PlayerCard from "../../components/PlayerCard";
-import avatarPlaceholder from "../../assets/images/avatars/avatar-0.png";
 import Loader from "../../components/Loader";
 
 interface IPlayersListUI {
