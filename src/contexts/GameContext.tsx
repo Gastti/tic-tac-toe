@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Marker, IPlayer } from "../App";
+import React, { useEffect, useState, useCallback } from "react";
+import { Marker, IPlayer, Status } from "../App";
 import { useNavigate } from "react-router-dom";
 
 interface GameProviderProps {
@@ -15,6 +15,8 @@ interface GameState {
   isFinished: boolean;
   gamemode: string;
   players: IPlayer[];
+  status: Status;
+  isSFXEnabled: boolean;
   setMarker: React.Dispatch<React.SetStateAction<Marker>>;
   setGameboard: React.Dispatch<React.SetStateAction<Marker[]>>;
   setCurrentMarker: React.Dispatch<React.SetStateAction<Marker>>;
@@ -22,89 +24,119 @@ interface GameState {
   setIsFinished: React.Dispatch<React.SetStateAction<boolean>>;
   setGamemode: React.Dispatch<React.SetStateAction<string>>;
   setPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>;
-  restart: () => void;
+  setStatus: React.Dispatch<React.SetStateAction<Status>>;
+  setIsSFXEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  userManagement: (name: string, avatar: string) => void;
+  getUserFromLocalStorage: () => IPlayer | null;
 }
-
-const initialGameboard = Array(9).fill("");
 
 const GameContext = React.createContext<GameState>({} as GameState);
 
 function GameProvider({ children }: GameProviderProps) {
   const navigate = useNavigate();
+
+  // Data
   const [user, setUser] = useState<IPlayer>({} as IPlayer);
   const [marker, setMarker] = useState<Marker>("" as Marker);
   const [gameboard, setGameboard] = useState<Marker[]>([]);
   const [currentMarker, setCurrentMarker] = useState<Marker>("");
-  const [isStarted, setIsStarted] = useState<boolean>(false);
-  const [isFinished, setIsFinished] = useState<boolean>(false);
   const [gamemode, setGamemode] = useState<string>("");
   const [players, setPlayers] = useState<Array<IPlayer>>([]);
 
-  useEffect(() => {
-    const findUser = localStorage.getItem("user");
+  // Config
+  const [isSFXEnabled, setIsSFXEnabled] = useState<boolean>(true);
 
-    if (!findUser) {
-      const randomNumber = Math.floor(Math.random() * 4) + 1;
-      const id = crypto.randomUUID();
-      const newUser = {
-        id: id,
-        name: "Invitado",
-        avatar: `/src/assets/images/avatars/avatar-${randomNumber}.png`,
-      };
+  // Status
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [isFinished, setIsFinished] = useState<boolean>(false);
+  const [status, setStatus] = useState<Status>("waiting");
 
-      setUser(newUser);
-      localStorage.setItem("user", JSON.stringify(newUser));
+  const getUserFromLocalStorage = useCallback((): IPlayer | null => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      return JSON.parse(user);
     }
-
-    const parsedUser = findUser ? JSON.parse(findUser) : null;
-    if (parsedUser) {
-      setUser(parsedUser);
-    }
+    return null;
   }, []);
+
+  useEffect(() => {
+    const user = getUserFromLocalStorage();
+
+    if (!user) {
+      navigate("/")
+    }
+
+    if (user) {
+      setUser(user);
+    }
+  }, [getUserFromLocalStorage, navigate]);
+
+  const userManagement = useCallback(
+    (name: string, avatar: string) => {
+      const user = getUserFromLocalStorage();
+      if (user) {
+        user.name = name;
+        user.avatar = avatar;
+        const stringifiedUser = JSON.stringify(user);
+        localStorage.setItem("user", stringifiedUser);
+      } else {
+        const id = crypto.randomUUID();
+        const newUser = { id, name, avatar };
+        const stringifiedUser = JSON.stringify(newUser);
+        localStorage.setItem("user", stringifiedUser);
+      }
+    },
+    [getUserFromLocalStorage],
+  )
+
 
   const value = React.useMemo(
     () => ({
       user,
       marker,
-      setMarker,
       gameboard,
-      setGameboard,
       currentMarker,
-      setCurrentMarker,
       isStarted,
-      setIsStarted,
       isFinished,
-      setIsFinished,
       gamemode,
-      setGamemode,
       players,
+      status,
+      isSFXEnabled,
+      setMarker,
+      setGameboard,
+      setCurrentMarker,
+      setIsStarted,
+      setIsFinished,
+      setGamemode,
       setPlayers,
+      setStatus,
+      setIsSFXEnabled,
+      getUserFromLocalStorage,
+      userManagement,
       navigate,
-      restart: () => {
-        setGamemode("");
-        setCurrentMarker("");
-        setGameboard(initialGameboard);
-        setIsStarted(false);
-        setIsFinished(false);
-        navigate("/");
-      },
     }),
     [
       user,
       marker,
-      setMarker,
       gameboard,
-      setGameboard,
       currentMarker,
-      setCurrentMarker,
       isStarted,
-      setIsStarted,
       isFinished,
-      setIsFinished,
       gamemode,
-      setGamemode,
       players,
+      status,
+      isSFXEnabled,
+      setMarker,
+      setGameboard,
+      setCurrentMarker,
+      setIsStarted,
+      setIsFinished,
+      setGamemode,
       setPlayers,
+      setStatus,
+      setIsSFXEnabled,
+      getUserFromLocalStorage,
+      userManagement,
       navigate,
     ]
   );
@@ -112,9 +144,4 @@ function GameProvider({ children }: GameProviderProps) {
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
 
-function useGame() {
-  const game = React.useContext(GameContext);
-  return game;
-}
-
-export { GameProvider, useGame };
+export { GameProvider, GameContext };

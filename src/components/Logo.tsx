@@ -1,20 +1,16 @@
 import "./Logo.css";
-import logo from "../assets/images/logo.png";
 import logosmall from "../assets/images/logosmall.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Logo() {
-  const path = window.location.pathname;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/")
+  }
   return (
-    <div>
-      {path === "/" ? (
-        <div className="logo">
-          <img src={logo} alt="logo" />
-        </div>
-      ) : (
-        <div className="logosmall">
-          <img src={logosmall} />
-        </div>
-      )}
+    <div className="logosmall" onClick={handleClick}>
+      <img src={logosmall} />
     </div>
   );
 }

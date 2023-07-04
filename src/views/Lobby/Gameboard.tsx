@@ -1,37 +1,47 @@
 import "./Gameboard.css";
 import { IPlayer, Marker } from "../../App";
+import { useGame } from "../../hooks/useGame";
+import { Socket } from "socket.io-client";
+import Match from "../../utils/matchUtils";
+import Player from "../../utils/playerUtils";
 
 interface IGameboard {
+    socket: Socket;
     gameboard: Array<Marker>
-    handleMovement: (cell: string, index: number) => void;
     isMyTurn: boolean;
     myMarker: Marker;
     winner: IPlayer | null;
-    restartMatch: () => void;
     draw: boolean;
     players: Array<IPlayer>;
 }
 
 export default function Gameboard({
+    socket,
     gameboard,
-    handleMovement,
-    isMyTurn, myMarker,
+    isMyTurn,
+    myMarker,
     winner,
-    restartMatch,
     draw,
-    players
+    players,
 }: IGameboard) {
+    const { isSFXEnabled } = useGame();
+
     const renderCell = (cell: string, index: number) => {
         return (
             <div
                 key={index}
                 className={`cell ${cell === "" ? "empty" : cell} ${!isMyTurn ? "disabled" : ""}`}
-                onClick={isMyTurn ? () => handleMovement(myMarker, index) : () => console.log('No es tu turno.')}
+                onClick={
+                    (isMyTurn && cell.length === 0)
+                        ? () => Player.move(socket, myMarker, index, isSFXEnabled)
+                        : undefined
+                }
             >
                 <span>{gameboard[index]}</span>
             </div>
         );
     };
+
     return (
         <div className="gameboard">
             {gameboard.map((cell, index) => renderCell(cell, index))}
@@ -41,7 +51,7 @@ export default function Gameboard({
                     <div className="winner-image"><img src={winner.avatar} /></div>
                     <button
                         className="button gradient-pink"
-                        onClick={restartMatch}
+                        onClick={() => Match.restart(socket)}
                     >
                         Volver a jugar
                     </button>
@@ -57,7 +67,7 @@ export default function Gameboard({
                     </div>
                     <button
                         className="button gradient-pink"
-                        onClick={restartMatch}
+                        onClick={() => Match.restart(socket)}
                     >
                         Volver a jugar
                     </button>

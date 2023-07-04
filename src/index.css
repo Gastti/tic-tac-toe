@@ -13,15 +13,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 
   --f-main: "Quicksand", sans-serif;
   --f-special: "Passion One", cursive;
+  --c-box-bg:#ffffff06;
+  --c-box-border: #160d3274;
+  --c-box-shadow: #fdfdfd18;
 }
 
 body {
+  max-width: 100%;
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
   background: #21d4fd;
   background: linear-gradient(180deg, #291c75 0%, #110f26 100%);
 }

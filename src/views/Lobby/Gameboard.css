@@ -1,13 +1,15 @@
 .gameboard {
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 100%;
+  max-height: 500px;
   margin: 0 auto;
   aspect-ratio: 1/1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;
   padding: 5px;
-  background-color: #6548c670;
+  background-color: var(--c-box-bg);
+  border: 2px solid var(--c-box-border);
+  box-shadow: inset 0px 3px 0px var(--c-box-shadow);
   border-radius: 10px;
   position: relative;
 }
@@ -15,11 +17,24 @@
 .gameboard > .cell {
   width: 100%;
   height: 100%;
-  background-color: #1e104c;
+  background-color: #ffffff0b;
+  border: 2px solid var(--c-box-border);
+  box-shadow: inset 0px 3px 0px var(--c-box-shadow);
   cursor: pointer;
   position: relative;
   border-radius: 10px;
   user-select: none;
+  transition: all 0.2s;
+}
+
+.gameboard > .cell:hover {
+  background-color: #ffffff16;
+  box-shadow: inset 0px 5px 0px var(--c-box-shadow);
+}
+
+.gameboard > .cell:active {
+  background-color: #00000009;
+  box-shadow: inset 0px 5px 0px #00000026;
 }
 
 .gameboard > .cell > span {
@@ -42,6 +57,15 @@
 
 .O {
   color: #ffcf32;
+}
+
+.X:hover,
+.X:active,
+.O:hover,
+.O:active {
+  background-color: #ffffff0b!important;
+  box-shadow: inset 0px 3px 0px var(--c-box-shadow)!important;
+  cursor: auto;
 }
 
 .finished {
@@ -80,6 +104,6 @@
 }
 
 .draw-players-list {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }

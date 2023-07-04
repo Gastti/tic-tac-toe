@@ -1,0 +1,19 @@
+.loadcircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-top: 4px solid #ffcf32;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-right: 4px solid #ffcf32;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(350deg);
+  }
+}

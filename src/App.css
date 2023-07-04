@@ -2,9 +2,10 @@
 
 .main-container {
   width: 100%;
-  height: 100vh;
-  padding: 10px;
+  min-height: 100%;
+  padding: 5px;
   background-image: url("./assets/images/bg.png");
+  box-sizing: border-box;
 }
 
 .title {
@@ -26,31 +27,111 @@
   background: #2dd779;
   background: linear-gradient(90deg, #2dd779 0%, #259cf1 100%);
 }
+.gradient-gray {
+  background: #a0a0a0;
+  background: linear-gradient(90deg, #d7d7d7 0%, #a0a0a0 100%);
+}
 
 .gradient-pink:hover,
 .gradient-orange:hover,
-.gradient-green:hover {
+.gradient-green:hover,
+.gradient-gray:hover {
   transform: scale(1.1);
 }
 
+.gradient-pink:active,
+.gradient-orange:active,
+.gradient-green:active,
+.gradient-gray:active {
+  transform: scale(1);
+}
+
 .button {
-  font-size: 2rem;
-  padding: 15px 40px;
+  font-size: 1.5rem;
+  padding: 10px 30px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
-  font-family: var(--f-special);
-  font-weight: 400;
+  font-family: var(--f-main);
+  font-weight: 600;
   margin: 20px auto;
   display: block;
 }
 
 .button.disabled {
   opacity: 0.5;
-  cursor: wait;
+  cursor: auto;
 }
 
 .button.disabled:hover {
   transform: scale(1);
+}
+
+.box-purple {
+  padding: 10px;
+  background-color: #1e104c;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #6548c674;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.copybutton {
+  padding: 7px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--f-main);
+  position: relative;
+}
+
+.copybutton:active {
+  transform: scale(1);
+}
+
+.copybutton > span {
+  position: absolute;
+  background-color: #000000d1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.soundtrack-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.soundtrack-container > button {
+  padding: 5px;
+  background-color: var(--c-box-bg);
+  box-shadow: inset 0px 2px 0px var(--c-box-shadow);
+  border: 2px solid var(--c-box-border);
+  border-radius: 10px;
+  display: flex;
+  place-items: center;
+  cursor: pointer;
+}
+
+.soundtrack-container > button > svg {
+  color: #ffffffd0;
+}
+
+.soundtrack-container > button:hover {
+  background-color: #ffffff0b;
+}
+
+.soundtrack-container > button:active {
+  background-color: #0000000b;
 }

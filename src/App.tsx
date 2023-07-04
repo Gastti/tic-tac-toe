@@ -4,13 +4,13 @@ import { GameProvider } from "./contexts/GameContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Logo from "./components/Logo";
 import avatar1 from "./assets/images/avatars/avatar-1.png";
-import Menu from "./views/Menu/Menu";
-import MarkerSelection from "./views/MarkerSelection/MarkerSelection";
-import Game from "./views/Game/Game";
-import Navbar from "./components/Navbar";
 import Lobby from "./views/Lobby/Lobby";
+import LobbyNotFound from "./views/Lobby/LobbyNotFound";
+import Soundtrack from "./components/Soundtrack";
+import Home from "./views/Home/Home";
 
 export type Marker = "X" | "O" | "";
+export type Status = "waiting" | "playing" | "finished";
 
 export interface IPlayer {
   id: string;
@@ -25,14 +25,15 @@ function App(): React.JSX.Element {
     <BrowserRouter>
       <GameProvider>
         <div className="main-container">
-          <Navbar />
           <Logo />
+          <Soundtrack />
           <Routes>
-            <Route path="/" element={<Menu />} />
-            <Route path="/markerselection" element={<MarkerSelection />} />
-            <Route path="/game" element={<Game />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/:slug" element={<Home />} />
+            <Route path="/invite/:slug" element={<Home />} />
             <Route path="/lobby" element={<Lobby />} />
             <Route path="/lobby/:slug/" element={<Lobby />} />
+            <Route path="/lobbynotfound" element={<LobbyNotFound />} />
           </Routes>
         </div>
       </GameProvider>

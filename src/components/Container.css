@@ -2,7 +2,8 @@
   background-color: transparent;
   padding: 0px;
   border-radius: 8px;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   z-index: 1;
+  gap: 10px;
 }
