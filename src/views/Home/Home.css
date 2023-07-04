@@ -12,12 +12,6 @@
 }
 
 .antesala-avatar > button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-}
-
-.antesala-avatar > button {
   padding: 5px;
   background-color: #282828;
   box-shadow: inset 0px 2px 0px var(--c-box-shadow);
@@ -26,6 +20,9 @@
   display: flex;
   place-items: center;
   cursor: pointer;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .antesala-avatar > button > svg {
