@@ -25,7 +25,6 @@ function App(): React.JSX.Element {
     <HashRouter>
       <GameProvider>
         <div className="main-container">
-          <Logo />
           <Soundtrack />
           <Routes>
             <Route path="/" element={<Home />} />

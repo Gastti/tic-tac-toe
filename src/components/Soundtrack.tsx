@@ -6,6 +6,7 @@ import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined';
 import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined';
 import Container from "./Container";
 import { useGame } from "../hooks/useGame";
+import Logo from "./Logo";
 
 export default function Soundtrack() {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -27,12 +28,15 @@ export default function Soundtrack() {
 
   return (
     <Container className="soundtrack-container">
-      <button onClick={toggleMusic}>
-        {isPlaying ? <VolumeUpOutlinedIcon /> : <VolumeOffOutlinedIcon />}
-      </button>
-      <button onClick={toggleSFX}>
-        {isSFXEnabled ? <MusicNoteOutlinedIcon /> : <MusicOffOutlinedIcon />}
-      </button>
+      <Logo />
+      <div>
+        <button onClick={toggleMusic}>
+          {isPlaying ? <VolumeUpOutlinedIcon /> : <VolumeOffOutlinedIcon />}
+        </button>
+        <button onClick={toggleSFX}>
+          {isSFXEnabled ? <MusicNoteOutlinedIcon /> : <MusicOffOutlinedIcon />}
+        </button>
+      </div>
       <audio ref={audioRef} autoPlay loop>
         <source src={music} type="audio/wav" />
       </audio>

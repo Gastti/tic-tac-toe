@@ -3,7 +3,7 @@
 .main-container {
   width: 100%;
   min-height: 100%;
-  padding: 5px;
+  padding: 15px;
   background-image: url("./assets/images/bg.png");
   box-sizing: border-box;
 }
@@ -110,10 +110,18 @@
 
 .soundtrack-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.soundtrack-container > button {
+.soundtrack-container > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.soundtrack-container > div > button {
   padding: 5px;
   background-color: var(--c-box-bg);
   box-shadow: inset 0px 2px 0px var(--c-box-shadow);
@@ -124,14 +132,14 @@
   cursor: pointer;
 }
 
-.soundtrack-container > button > svg {
+.soundtrack-container > div > button > svg {
   color: #ffffffd0;
 }
 
-.soundtrack-container > button:hover {
+.soundtrack-container > div > button:hover {
   background-color: #ffffff0b;
 }
 
-.soundtrack-container > button:active {
+.soundtrack-container > div > button:active {
   background-color: #0000000b;
 }

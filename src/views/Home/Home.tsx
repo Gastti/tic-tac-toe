@@ -30,7 +30,7 @@ export default function Home() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (name.length < 3) setError(true);
+        if (name.length < 3 || name.length > 15) setError(true);
         else {
             setError(false);
             userManagement(name, avatar);
@@ -60,9 +60,11 @@ export default function Home() {
                     </div>
                     <div className="antesala-name">
                         <input type="text" name="name" value={name} onChange={handleOnChange} />
-                        {error && <p className="antesala-error">Tu nickname debe tener al menos 3 letras.</p>}
+                        {error && <p className="antesala-error">Tu nick debe contener entre 3 y 15 caracteres.</p>}
                     </div>
-                    <button type="submit" className="button gradient-pink">Ingresar a la sala</button>
+                    <button type="submit" className="button gradient-pink">
+                        {slug ? "Ingresar a la Sala" : "Crear Sala"}
+                    </button>
                 </form>
             </Box>
         </Container>
