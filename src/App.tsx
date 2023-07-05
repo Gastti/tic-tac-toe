@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { GameProvider } from "./contexts/GameContext";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Logo from "./components/Logo";
 import avatar1 from "./assets/images/avatars/avatar-1.png";
 import Lobby from "./views/Lobby/Lobby";
 import LobbyNotFound from "./views/Lobby/LobbyNotFound";
