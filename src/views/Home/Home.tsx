@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function Home() {
     const { userManagement, getUserFromLocalStorage } = useGame();
     const [name, setName] = useState<string>(`Invitado ${(Math.floor(Math.random() * 40) + 100)}`);
-    const [avatar, setAvatar] = useState<string>("/src/assets/images/avatars/avatar-0.png");
+    const [avatar, setAvatar] = useState<string>("/images/avatars/avatar-0.png");
     const [error, setError] = useState<boolean>(false);
     const navigate = useNavigate();
     const { slug } = useParams();
@@ -42,7 +42,7 @@ export default function Home() {
     const handleAvatar = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const randomNumber = Math.floor(Math.random() * 9) + 1;
-        setAvatar(`/src/assets/images/avatars/avatar-${randomNumber}.png`);
+        setAvatar(`/images/avatars/avatar-${randomNumber}.png`);
     }
 
     return (

@@ -132,7 +132,7 @@ export default function LobbyView() {
       {(lobbyId && !isStarted && players.length < 2) && (
         <Box className="row j-between a-center margin-bottom">
           <span>¡Lobby creado! <b>#{lobbyId}</b></span>
-          <CopyButton link={`${CLIENT_URL}/invite/${lobbyId}`}>Copiar Invitacion</CopyButton>
+          <CopyButton link={`${CLIENT_URL}/#/invite/${lobbyId}`}>Copiar Invitacion</CopyButton>
         </Box>
       )}
       {(players.length > 0) && <PlayersListUI players={players} turn={turn} />}
