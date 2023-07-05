@@ -10,7 +10,6 @@ interface IStartButton {
 export default function StartButton({ socket, children }: IStartButton) {
     const { players, isSFXEnabled } = useGame();
     const handleOnClick = () => {
-        console.log(players.length);
         if (players.length >= 2) Match.start(socket, isSFXEnabled);
     }
 

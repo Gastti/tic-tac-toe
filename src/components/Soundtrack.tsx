@@ -9,7 +9,7 @@ import { useGame } from "../hooks/useGame";
 import Logo from "./Logo";
 
 export default function Soundtrack() {
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { isSFXEnabled, setIsSFXEnabled } = useGame();
 

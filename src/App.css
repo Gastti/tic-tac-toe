@@ -2,7 +2,8 @@
 
 .main-container {
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
+  height: 100%;
   padding: 15px;
   background-image: url("./assets/images/bg.png");
   box-sizing: border-box;
@@ -57,6 +58,10 @@
   font-weight: 600;
   margin: 20px auto;
   display: block;
+}
+
+.button.small {
+  font-size: 1rem;
 }
 
 .button.disabled {

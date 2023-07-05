@@ -15,7 +15,7 @@ import StartButton from "../../components/StartButton";
 
 const CLIENT_URL = `${window.location.protocol}//${window.location.host}`;
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-const socket: Socket = io(SERVER_URL, { transports : ['websocket'] });
+const socket: Socket = io(SERVER_URL, { transports: ['websocket'] });
 
 export default function LobbyView() {
   const navigate = useNavigate();
@@ -115,6 +115,10 @@ export default function LobbyView() {
       setDraw(draw);
       setStatus(status);
       setIsStarted(false);
+    })
+
+    socket.on("error", () => {
+      navigate('/error')
     })
 
     return () => {

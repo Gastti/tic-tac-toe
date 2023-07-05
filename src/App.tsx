@@ -7,6 +7,7 @@ import Lobby from "./views/Lobby/Lobby";
 import LobbyNotFound from "./views/Lobby/LobbyNotFound";
 import Soundtrack from "./components/Soundtrack";
 import Home from "./views/Home/Home";
+import Error from "./views/Error/Error";
 
 export type Marker = "X" | "O" | "";
 export type Status = "waiting" | "playing" | "finished";
@@ -27,11 +28,11 @@ function App(): React.JSX.Element {
           <Soundtrack />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/:slug" element={<Home />} />
             <Route path="/invite/:slug" element={<Home />} />
             <Route path="/lobby" element={<Lobby />} />
             <Route path="/lobby/:slug/" element={<Lobby />} />
             <Route path="/lobbynotfound" element={<LobbyNotFound />} />
+            <Route path="/error" element={<Error />} />
           </Routes>
         </div>
       </GameProvider>
