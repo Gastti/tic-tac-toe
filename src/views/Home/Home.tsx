@@ -47,9 +47,9 @@ export default function Home() {
 
     return (
         <Container>
-            <Title>Antesala</Title>
+            <Title>¡Bienvenido!</Title>
             <Box>
-                Hola <b>{name}</b>, prepara tu perfil antes de ingresar a la partida.
+                <p style={{textAlign: "center"}}>Hola <b>{name}</b>, si quieres puedes editar tu perfil antes de comenzar.</p>
                 <form
                     className="antesala-info"
                     onSubmit={handleSubmit}
@@ -63,7 +63,7 @@ export default function Home() {
                         {error && <p className="antesala-error">Tu nick debe contener entre 3 y 15 caracteres.</p>}
                     </div>
                     <button type="submit" className="button gradient-pink">
-                        {slug ? "Ingresar a la Sala" : "Crear Sala"}
+                        {slug ? "Unirse a la Sala" : "Crear Sala"}
                     </button>
                 </form>
             </Box>
